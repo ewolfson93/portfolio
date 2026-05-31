@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ----------------------------------------------------------------------------
+   Design tokens — semantic, theme-switched. Echoes MCM navy/blue but reads as a
+   personal engineering brand: deep ink base, controlled blue accent, cyan signal.
+---------------------------------------------------------------------------- */
+:root {
+  --background: #fbfbfd;
+  --surface: #ffffff;
+  --surface-2: #f4f6fb;
+  --foreground: #0b1220;
+  --muted: #586173;
+  --muted-strong: #3a4356;
+  --border: #e4e7ee;
+  --border-strong: #d2d7e2;
+  --accent: #1657c8;
+  --accent-strong: #0f47a8;
+  --accent-foreground: #ffffff;
+  --signal: #2f7d5e;
+  --ring: #1657c8;
+  --grid-line: rgba(11, 18, 32, 0.05);
+}
+
+.dark {
+  --background: #080b14;
+  --surface: #0f1626;
+  --surface-2: #141d31;
+  --foreground: #e8ecf4;
+  --muted: #93a0b7;
+  --muted-strong: #b7c1d4;
+  --border: #1f2a40;
+  --border-strong: #2a3855;
+  --accent: #5f97f0;
+  --accent-strong: #3b7bef;
+  --accent-foreground: #06101f;
+  --signal: #7fae96;
+  --ring: #5f97f0;
+  --grid-line: rgba(232, 236, 244, 0.045);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-signal: var(--signal);
+  --color-ring: var(--ring);
+
+  --font-display: var(--font-display), "Segoe UI", sans-serif;
+  --font-sans: var(--font-sans), "Segoe UI", sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  --radius-card: 0.875rem;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 28%, transparent);
+}
+
+/* Focus visibility — accessibility baseline */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Subtle background grid used on hero / section dividers */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

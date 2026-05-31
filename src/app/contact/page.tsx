@@ -26,7 +26,7 @@ const channels = [
   },
   {
     label: "LinkedIn",
-    value: "in/ericwolfson",
+    value: "in/eric-wolfson",
     href: socials.linkedin,
     icon: LinkedinIcon,
   },

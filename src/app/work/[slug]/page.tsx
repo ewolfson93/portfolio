@@ -75,17 +75,28 @@ export default async function CaseStudyPage({
             ))}
           </div>
 
-          {study.repoUrl && (
-            <a
-              href={study.repoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-8 inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:border-border-strong"
-            >
-              <GithubIcon className="h-4 w-4" />
-              {study.repoLabel ?? "View repository"}
-            </a>
-          )}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            {study.demoUrl && (
+              <Link
+                href={study.demoUrl}
+                className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-strong"
+              >
+                Open the live demo
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            )}
+            {study.repoUrl && (
+              <a
+                href={study.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm font-medium transition-colors hover:border-border-strong"
+              >
+                <GithubIcon className="h-4 w-4" />
+                {study.repoLabel ?? "View repository"}
+              </a>
+            )}
+          </div>
         </div>
       </header>
 

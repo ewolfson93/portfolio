@@ -6,7 +6,7 @@
 export const socials = {
   // TODO(eric): confirm LinkedIn handle before deploy.
   github: "https://github.com/ewolfson93",
-  linkedin: "https://www.linkedin.com/in/ericwolfson",
+  linkedin: "https://www.linkedin.com/in/eric-wolfson",
   email: "ewolfson@mychemmentor.com",
 };
 
@@ -105,6 +105,8 @@ export type CaseStudy = {
   highlights?: string[];
   repoUrl?: string;
   repoLabel?: string;
+  /** Optional internal live-demo route (e.g. "/demo"). */
+  demoUrl?: string;
   /** Image slots; absent images degrade gracefully to the diagram. */
   screenshots?: { src: string; alt: string; caption: string }[];
 };
@@ -471,6 +473,7 @@ export const caseStudies: CaseStudy[] = [
       "2,600 LOC of inspection logic",
       "Blocking data-quality gates",
     ],
+    demoUrl: "/demo",
   },
 ];
 

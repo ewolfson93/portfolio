@@ -2,28 +2,18 @@
 
 Tracked work remaining on the portfolio, in rough priority order.
 
-## 1. Screenshots / a "demo mode" dashboard  (deferred by design)
+## 1. Demo dashboard  (Tier B SHIPPED 2026-05-31)
 
-The case studies currently lead with data-driven architecture diagrams (no images). Real screenshots
-of the dashboard and vaults are deferred because those screens contain **real student PII**, which
-must never leave the Students vault.
+Instead of redacting real screens (which hold student PII), the portfolio ships a live, brand-matched
+**operations dashboard at `/demo`** running on a fully fictional seeded dataset (`src/lib/demo-data.ts`,
+22 invented students). Tabs: Overview, Roster, Finance, Automations. Deep-linkable via hash
+(`/demo#roster`). Linked from the nav and the ops-dashboard case study.
 
-**Decision (2026-05-31):** instead of redacting real screens, build a **seeded fake dataset** that
-simulates a scaled practice. This protects real data and, importantly, shows the system at a more
-impressive scale than the current handful of real students.
+This protects real data and shows the system at a more impressive scale than the current handful of
+real students. The live route doubles as the "screenshot" — no static captures of real tooling needed.
 
-Two tiers:
-
-- **Tier A (quick):** generate ~15-25 fictional students (realistic names, courses, package math,
-  session history) into a `dashboard-data.demo.js`, load it in the existing `dashboard.html`, and
-  capture screenshots. Low effort, reuses the current UI.
-- **Tier B (polished):** rebuild a read-only "demo dashboard" view inside this portfolio's own
-  Next.js + Tailwind stack (same data shape, modern brand-matched visuals). More work, but the
-  screenshots would look portfolio-grade and could double as a live interactive demo route
-  (e.g. `/demo`).
-
-Recommendation: do Tier A first to validate the look, then decide whether Tier B is worth it. A
-permanent demo dataset is reusable for screenshots, screen recordings, and live walkthroughs.
+Optional later: tune the fake data further, add more tabs (Inbox, Mentorship) to mirror the real v2.7
+dashboard, or record a short screen walkthrough of `/demo` for the case study.
 
 ## 2. Custom domain
 
@@ -31,10 +21,9 @@ Deploying to a free `vercel.app` URL first. Attach a domain later (recommended: 
 or `ericwolfson.dev`). Buy at Cloudflare Registrar or Porkbun, then add it in the Vercel dashboard
 (two DNS records).
 
-## 3. LinkedIn URL
+## 3. LinkedIn URL  (DONE)
 
-`src/lib/site-data.ts` `socials.linkedin` is a placeholder (`in/ericwolfson`). Replace with the real
-profile URL.
+`socials.linkedin` is set to `in/eric-wolfson`.
 
 ## 4. Optional design tooling
 

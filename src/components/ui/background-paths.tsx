@@ -83,6 +83,13 @@ export function BackgroundPaths({
         <FloatingPaths position={-1} reduce={reduce} />
       </div>
 
+      {/* Radial scrim: keeps text legible over the moving lines, lines still show at the edges */}
+      <div
+        className="absolute inset-0 pointer-events-none
+          bg-[radial-gradient(ellipse_58%_48%_at_50%_50%,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.6)_45%,transparent_75%)]
+          dark:bg-[radial-gradient(ellipse_58%_48%_at_50%_50%,rgba(10,10,10,0.9)_0%,rgba(10,10,10,0.6)_45%,transparent_75%)]"
+      />
+
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
         <motion.div
           initial={{ opacity: reduce ? 1 : 0 }}
@@ -120,7 +127,7 @@ export function BackgroundPaths({
               initial={{ opacity: reduce ? 1 : 0, y: reduce ? 0 : 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="mx-auto mb-10 max-w-xl text-base sm:text-lg text-neutral-600 dark:text-white/50"
+              className="mx-auto mb-10 max-w-xl text-base sm:text-lg text-neutral-700 dark:text-white/75"
             >
               {subtitle}
             </motion.p>

@@ -20,6 +20,7 @@
   --accent-foreground: #ffffff;
   --signal: #2f7d5e;
   --ring: #1657c8;
+  --destructive: #dc2626;
   --grid-line: rgba(11, 18, 32, 0.05);
 }
 
@@ -37,6 +38,7 @@
   --accent-foreground: #06101f;
   --signal: #7fae96;
   --ring: #5f97f0;
+  --destructive: #ef4444;
   --grid-line: rgba(232, 236, 244, 0.045);
 }
 
@@ -54,6 +56,15 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-signal: var(--signal);
   --color-ring: var(--ring);
+
+  /* shadcn-compatible aliases (map onto the palette above) */
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-foreground);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: #ffffff;
+  --color-input: var(--border);
 
   --font-display: var(--font-display), "Segoe UI", sans-serif;
   --font-sans: var(--font-sans), "Segoe UI", sans-serif;

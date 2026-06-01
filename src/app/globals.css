@@ -65,6 +65,9 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: #ffffff;
   --color-input: var(--border);
+  --color-muted-foreground: var(--muted);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
 
   --font-display: var(--font-display), "Segoe UI", sans-serif;
   --font-sans: var(--font-sans), "Segoe UI", sans-serif;

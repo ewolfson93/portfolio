@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 function FloatingPaths({
   position,
   reduce,
+  colorClassName,
 }: {
   position: number;
   reduce: boolean;
+  colorClassName: string;
 }) {
   const paths = Array.from({ length: 36 }, (_, i) => ({
     id: i,
@@ -26,7 +28,7 @@ function FloatingPaths({
   return (
     <div className="absolute inset-0 pointer-events-none">
       <svg
-        className="w-full h-full text-slate-950 dark:text-white"
+        className={`w-full h-full ${colorClassName}`}
         viewBox="0 0 696 316"
         fill="none"
       >
@@ -68,26 +70,50 @@ export function BackgroundPaths({
   title = "Background Paths",
   subtitle,
   cta,
+  bgClassName = "bg-neutral-950",
+  pathColorClassName = "text-white",
+  titleGradientClassName = "from-white to-white/80",
+  subtitleClassName = "text-white/75",
+  // RGB triplet used to build the soft center scrim (match the background).
+  scrimRgb = "10, 10, 10",
 }: {
   title?: string;
   subtitle?: string;
   cta?: ReactNode;
+  bgClassName?: string;
+  pathColorClassName?: string;
+  titleGradientClassName?: string;
+  subtitleClassName?: string;
+  scrimRgb?: string;
 }) {
   const reduce = useReducedMotion() ?? false;
   const words = title.split(" ");
 
+  // Many-stop falloff so the transition reads as continuous, not banded.
+  const scrim =
+    `radial-gradient(ellipse 72% 60% at 50% 50%, ` +
+    `rgba(${scrimRgb}, 0.92) 0%, ` +
+    `rgba(${scrimRgb}, 0.88) 18%, ` +
+    `rgba(${scrimRgb}, 0.78) 32%, ` +
+    `rgba(${scrimRgb}, 0.6) 44%, ` +
+    `rgba(${scrimRgb}, 0.4) 56%, ` +
+    `rgba(${scrimRgb}, 0.2) 68%, ` +
+    `rgba(${scrimRgb}, 0.08) 80%, ` +
+    `rgba(${scrimRgb}, 0) 92%)`;
+
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950">
+    <div
+      className={`relative min-h-screen w-full flex items-center justify-center overflow-hidden ${bgClassName}`}
+    >
       <div className="absolute inset-0">
-        <FloatingPaths position={1} reduce={reduce} />
-        <FloatingPaths position={-1} reduce={reduce} />
+        <FloatingPaths position={1} reduce={reduce} colorClassName={pathColorClassName} />
+        <FloatingPaths position={-1} reduce={reduce} colorClassName={pathColorClassName} />
       </div>
 
-      {/* Radial scrim: keeps text legible over the moving lines, lines still show at the edges */}
+      {/* Soft radial scrim keeps text legible; lines still read at the edges */}
       <div
-        className="absolute inset-0 pointer-events-none
-          bg-[radial-gradient(ellipse_58%_48%_at_50%_50%,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.6)_45%,transparent_75%)]
-          dark:bg-[radial-gradient(ellipse_58%_48%_at_50%_50%,rgba(10,10,10,0.9)_0%,rgba(10,10,10,0.6)_45%,transparent_75%)]"
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: scrim }}
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
@@ -111,9 +137,7 @@ export function BackgroundPaths({
                       stiffness: 150,
                       damping: 25,
                     }}
-                    className="inline-block text-transparent bg-clip-text
-                      bg-gradient-to-r from-neutral-900 to-neutral-700/80
-                      dark:from-white dark:to-white/80"
+                    className={`inline-block text-transparent bg-clip-text bg-gradient-to-r ${titleGradientClassName}`}
                   >
                     {letter}
                   </motion.span>
@@ -127,25 +151,23 @@ export function BackgroundPaths({
               initial={{ opacity: reduce ? 1 : 0, y: reduce ? 0 : 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="mx-auto mb-10 max-w-xl text-base sm:text-lg text-neutral-700 dark:text-white/75"
+              className={`mx-auto mb-10 max-w-xl text-base sm:text-lg ${subtitleClassName}`}
             >
               {subtitle}
             </motion.p>
           )}
 
           <div
-            className="inline-block group relative bg-gradient-to-b from-black/10 to-white/10
-              dark:from-white/10 dark:to-black/10 p-px rounded-2xl backdrop-blur-lg
-              overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="inline-block group relative bg-gradient-to-b from-white/10 to-black/10
+              p-px rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             {cta ?? (
               <Button
                 variant="ghost"
                 className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md
-                  bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100
-                  text-black dark:text-white transition-all duration-300
-                  group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
-                  hover:shadow-md dark:hover:shadow-neutral-800/50"
+                  bg-black/95 hover:bg-black/100 text-white transition-all duration-300
+                  group-hover:-translate-y-0.5 border border-white/10
+                  hover:shadow-md hover:shadow-neutral-800/50"
               >
                 <span className="opacity-90 group-hover:opacity-100 transition-opacity">
                   Discover Excellence
